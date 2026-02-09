@@ -567,6 +567,12 @@ function renderMenu() {
   }
 };
 
+menu.innerHTML += `
+  <div class="notice">
+    <strong>${data[lang].meatNoticeTitle}</strong><br>
+    ${data[lang].meatNotice}
+  </div>
+`;
 
   // 🥩 고기류
   menu.innerHTML += `<div class="section-title">🥩 Meat</div>`;
