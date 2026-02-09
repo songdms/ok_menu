@@ -122,13 +122,13 @@ const data = {
     total: "Total",
     items: [
       // 고기류
-      { id: 1, cat: "meat", name: "Beef Rib Finger (소갈비살)", desc: "Evenly marbled, tender yet pleasantly chewy. The more you chew, the richer the juicy and savory flavor.", price: 7900, min: 3, img: "meat1.jpg" },
-      { id: 2, cat: "meat", name: "Marinated Beef Rib Finger (양념소갈비살)", desc: "Marinated for 24 hours at low temperature with natural fruit sauce, resulting in juicy and tender meat.", price: 7900, min: 3, img: "meat2.jpg" },
-      { id: 3, cat: "meat", name: "Kkodul Cut (꼬들살)", desc: "A rare cut (only about 400g per pork) from the back of the neck. Features tender lean meat and chewy fat layers with a rich, savory texture.", price: 7900, min: 3, img: "meat3.jpg" },
-      { id: 4, cat: "meat", name: "Marinated Pork Ribs (돼지양념갈비)", desc: "Naturally marinated to enhance deep flavor, offering a tender texture and rich taste.", price: 7500, min: 3, img: "meat4.jpg" },
-      { id: 5, cat: "meat", name: "Prime Rib Finger (진갈비살)", desc: "Rich, juicy, and full of savory umami flavor. Soft and highly flavorful.", price: 13000, min: 3, img: "meat5.jpg" },
-      { id: 6, cat: "meat", name: "Korean Beef Tartare (한우육회)", desc: "Fresh Korean beef seasoned with premium ingredients. Melts in your mouth with a clean and fresh taste.", price: 18000, min: 1, img: "meat6.jpg" },
-      { id: 7, cat: "meat", name: "Pork Skin (돼지껍데기)", desc: "Rich in collagen and protein. Popular for skin health and dieting.", price: 4000, min: 3, img: "meat7.jpg" },
+      { id: 1, cat: "meat", name: "Beef Rib Finger (소갈비살)", desc: "Evenly marbled, tender yet pleasantly chewy. The more you chew, the richer the juicy and savory flavor.", price: 7900, min: 3, img: "images/meat1.jpg" },
+      { id: 2, cat: "meat", name: "Marinated Beef Rib Finger (양념소갈비살)", desc: "Marinated for 24 hours at low temperature with natural fruit sauce, resulting in juicy and tender meat.", price: 7900, min: 3, img: "images/meat2.jpg" },
+      { id: 3, cat: "meat", name: "Kkodul Cut (꼬들살)", desc: "A rare cut (only about 400g per pork) from the back of the neck. Features tender lean meat and chewy fat layers with a rich, savory texture.", price: 7900, min: 3, img: "images/meat3.jpg" },
+      { id: 4, cat: "meat", name: "Marinated Pork Ribs (돼지양념갈비)", desc: "Naturally marinated to enhance deep flavor, offering a tender texture and rich taste.", price: 7500, min: 3, img: "images/meat4.jpg" },
+      { id: 5, cat: "meat", name: "Prime Rib Finger (진갈비살)", desc: "Rich, juicy, and full of savory umami flavor. Soft and highly flavorful.", price: 13000, min: 3, img: "images/meat5.jpg" },
+      { id: 6, cat: "meat", name: "Korean Beef Tartare (한우육회)", desc: "Fresh Korean beef seasoned with premium ingredients. Melts in your mouth with a clean and fresh taste.", price: 18000, min: 1, img: "images/meat6.jpg" },
+      { id: 7, cat: "meat", name: "Pork Skin (돼지껍데기)", desc: "Rich in collagen and protein. Popular for skin health and dieting.", price: 4000, min: 3, img: "images/meat7.jpg" },
 
       // 식사류
       { id: 20, cat: "meal", name: "Soybean Ramen (된장라면)", desc: "", price: 4500, min: 1 },
