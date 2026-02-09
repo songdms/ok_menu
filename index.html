@@ -46,11 +46,21 @@
       color: #444;
       line-height: 1.4;
     }
-    .item img {
-      margin-bottom: 8px;
-      max-height: 180px;
-      object-fit: cover;
+    .item-header {
+      display: flex;
+      gap: 10px;
+      align-items: center;
     }
+
+    .thumb {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 6px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
     .notice strong {
       color: #111;
     }
@@ -120,6 +130,17 @@
 </div>
 
 <script>
+function openImage(src) {
+    const modal = document.getElementById("imgModal");
+    const img = document.getElementById("modalImg");
+    img.src = src;
+    modal.style.display = "flex";
+}
+
+function closeImage() {
+    document.getElementById("imgModal").style.display = "none";
+}
+
 const data = {
   en: {
     title: "MENU",
@@ -210,8 +231,11 @@ function renderItem(item) {
   const div = document.createElement("div");
   div.className = "item";
   div.innerHTML = `
-    ${item.img ? `<img src="${item.img}" style="width:100%;border-radius:8px;">` : ""}
-    <div class="name">${item.name}</div>
+    <div class="item-header">
+      ${item.img ? `<img src="${item.img}" class="thumb" onclick="openImage('${item.img}')">` : ""}
+      <div class="name">${item.name}</div>
+    </div>
+
     <div class="desc">${item.desc || ""}</div>
     <div class="price">
       ₩${item.price.toLocaleString()}
@@ -340,6 +364,26 @@ function closeSummary() {
   <strong>Country of Origin</strong><br>
   Rice: Korea · Kimchi: China (Cabbage, Chili Powder: China)<br>
   Tofu: Imported Soybeans · Nurungji (Scorched Rice): Korea
+</div>
+<div id="imgModal"
+  onclick="closeImage()"
+  style="
+    display:none;
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.8);
+    z-index:1000;
+    justify-content:center;
+    align-items:center;
+  ">
+
+  <img id="modalImg"
+    style="
+      max-width:90%;
+      max-height:90%;
+      border-radius:12px;
+    ">
 </div>
 
 </body>
