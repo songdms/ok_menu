@@ -632,19 +632,25 @@ function renderCart() {
 
     cartDiv.innerHTML += `
       <div class="cart-item">
-        ${item.name} × ${qty}
+        ${item.name[lang]} (${item.name.ko}) × ${qty}
         <span>₩${sum.toLocaleString()}</span>
-<button onclick="showSummary()"
-  style="width:100%;margin-top:8px;padding:10px;
-         background:#111;color:#fff;border:none;border-radius:6px;">
-  Cart
-</button>
       </div>
+    `;
+  }
+
+  if (total > 0) {
+    cartDiv.innerHTML += `
+      <button onclick="showSummary()"
+        style="width:100%;margin-top:8px;padding:10px;
+               background:#111;color:#fff;border:none;border-radius:6px;">
+        Cart
+      </button>
     `;
   }
 
   totalDiv.innerText = `${data[lang].total}: ₩${total.toLocaleString()}`;
 }
+  
 
 function setLang(l) {
   lang = l;
@@ -670,7 +676,7 @@ function showSummary() {
 
     box.innerHTML += `
       <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
-        <span>${item.name} × ${qty}</span>
+        <span>${item.name[lang]} (${item.name.ko}) × ${qty}</span>
         <span>₩${sum.toLocaleString()}</span>
       </div>
     `;
