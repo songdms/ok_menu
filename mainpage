@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu</title>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      background: #f5f5f5;
+    }
+    header {
+      background: #111;
+      color: #fff;
+      padding: 14px;
+      text-align: center;
+      font-size: 20px;
+    }
+    .lang {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px;
+      background: #fff;
+    }
+    .lang button {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background: #fff;
+    }
+    .section-title {
+      margin: 24px 0 12px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #111;
+    }
+    .notice {
+      background: #fff;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 16px;
+      font-size: 14px;
+      color: #444;
+      line-height: 1.4;
+    }
+    .notice strong {
+      color: #111;
+    }
+    .menu {
+      padding: 16px;
+    }
+    .item {
+      background: #fff;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+    .name {
+      font-weight: 600;
+    }
+    .desc {
+      font-size: 14px;
+      color: #666;
+      margin: 6px 0;
+    }
+    .price {
+      font-weight: 600;
+    }
+    .item button {
+      margin-top: 8px;
+      width: 100%;
+      padding: 8px;
+      background: #111;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+    }
+    .cart {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #fff;
+      border-top: 1px solid #ddd;
+      padding: 12px;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+    }
+    .total {
+      font-weight: 700;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header id="title">MENU</header>
+
+<div class="lang">
+  <button onclick="setLang('en')">English</button>
+  <button onclick="setLang('zh')">中文</button>
+</div>
+
+<section class="menu" id="menu"></section>
+
+<div class="cart" id="cart">
+  <div id="cartItems"></div>
+  <div class="total" id="total"></div>
+</div>
+
+<script>
+const data = {
+  en: {
+    title: "MENU",
+    add: "Add",
+    total: "Total",
+    items: [
+      // 고기류
+      { id: 1, cat: "meat", name: "Beef Rib Finger (소갈비살)", desc: "Evenly marbled, tender yet pleasantly chewy. The more you chew, the richer the juicy and savory flavor.", price: 7900, min: 3, img: "meat1.jpg" },
+      { id: 2, cat: "meat", name: "Marinated Beef Rib Finger (양념소갈비살)", desc: "Marinated for 24 hours at low temperature with natural fruit sauce, resulting in juicy and tender meat.", price: 7900, min: 3, img: "meat2.jpg" },
+      { id: 3, cat: "meat", name: "Kkodul Cut (꼬들살)", desc: "A rare cut (only about 400g per pork) from the back of the neck. Features tender lean meat and chewy fat layers with a rich, savory texture.", price: 7900, min: 3, img: "meat3.jpg" },
+      { id: 4, cat: "meat", name: "Marinated Pork Ribs (돼지양념갈비)", desc: "Naturally marinated to enhance deep flavor, offering a tender texture and rich taste.", price: 7500, min: 3, img: "meat4.jpg" },
+      { id: 5, cat: "meat", name: "Prime Rib Finger (진갈비살)", desc: "Rich, juicy, and full of savory umami flavor. Soft and highly flavorful.", price: 13000, min: 3, img: "meat5.jpg" },
+      { id: 6, cat: "meat", name: "Korean Beef Tartare (한우육회)", desc: "Fresh Korean beef seasoned with premium ingredients. Melts in your mouth with a clean and fresh taste.", price: 18000, min: 1, img: "meat6.jpg" },
+      { id: 7, cat: "meat", name: "Pork Skin (돼지껍데기)", desc: "Rich in collagen and protein. Popular for skin health and dieting.", price: 4000, min: 3, img: "meat7.jpg" },
+
+      // 식사류
+      { id: 20, cat: "meal", name: "Soybean Ramen (된장라면)", desc: "", price: 4500, min: 1 },
+      { id: 21, cat: "meal", name: "Cold Noodles (물냉면)", desc: "", price: 4000, min: 1 },
+      { id: 22, cat: "meal", name: "Scorched Rice(Nurungji) (누룽지)", desc: "", price: 2000, min: 1 },
+      { id: 23, cat: "meal", name: "Soybean Stew (된장찌개)", desc: "", price: 2000, min: 1 },
+      { id: 24, cat: "meal", name: "Rice (공기밥)", desc: "", price: 1000, min: 1 },
+
+      // 주류
+      { id: 30, cat: "drink", name: "Daesun Soju (대선)", desc: "", price: 4500, min: 1 },
+      { id: 31, cat: "drink", name: "Chamisul Soju (참이슬)", desc: "", price: 4500, min: 1 },
+      { id: 32, cat: "drink", name: "Good Day Soju (좋은데이)", desc: "", price: 4500, min: 1 },
+      { id: 33, cat: "drink", name: "Saero Soju (새로)", desc: "", price: 4500, min: 1 },
+      { id: 34, cat: "drink", name: "Siwon Soju (시원)", desc: "", price: 4500, min: 1 },
+      { id: 35, cat: "drink", name: "Cass Beer (카스)", desc: "", price: 5000, min: 1 },
+      { id: 36, cat: "drink", name: "Terra Beer (테라)", desc: "", price: 5000, min: 1 },
+      { id: 37, cat: "drink", name: "Cheongha (청하)", desc: "", price: 6000, min: 1 },
+      { id: 38, cat: "drink", name: "Cass 0.0 (Non-Alcoholic) (카스제로)", desc: "", price: 4000, min: 1 },
+      { id: 39, cat: "drink", name: "Coke (Can) (콜라)", desc: "", price: 2000, min: 1 },
+      { id: 40, cat: "drink", name: "Sprite (Can) (스프라이트)", desc: "", price: 2000, min: 1 },
+      { id: 41, cat: "drink", name: "Zero Coke (Can) (제로콜라)", desc: "", price: 2000, min: 1 },
+      { id: 42, cat: "drink", name: "Fanta (Can) (환타)", desc: "", price: 2000, min: 1 }
+    ]
+  },
+
+  zh: {
+    title: "菜单",
+    add: "加入",
+    total: "总价",
+    items: [] // 가격/ID 동일 → 영어 데이터 재사용
+  }
+};
+
+data.zh.items = data.en.items.map(i => ({ ...i }));
+
+let lang = "en";
+let cart = {};
+
+function renderMenu() {
+  document.getElementById("title").innerText = data[lang].title;
+  const menu = document.getElementById("menu");
+  menu.innerHTML = "";
+
+  // 🥩 고기류 주문 안내
+  menu.innerHTML += `
+    <div class="notice">
+      <strong>Meat Order Notice</strong><br>
+      Meat items require a minimum order of <strong>3 servings</strong> per item.<br>
+      (Korean Beef Tartare is excluded.)
+    </div>
+  `;
+
+  // 🥩 고기류
+  menu.innerHTML += `<div class="section-title">🥩 Meat</div>`;
+  data[lang].items
+    .filter(item => item.cat === "meat")
+    .forEach(renderItem);
+
+  // 🍚 식사류
+  menu.innerHTML += `<div class="section-title">🍚 Meals</div>`;
+  data[lang].items
+    .filter(item => item.cat === "meal")
+    .forEach(renderItem);
+
+  // 🍺 주류
+  menu.innerHTML += `<div class="section-title">🍺 Drinks</div>`;
+  data[lang].items
+    .filter(item => item.cat === "drink")
+    .forEach(renderItem);
+}
+
+function renderItem(item) {
+  const menu = document.getElementById("menu");
+  const div = document.createElement("div");
+  div.className = "item";
+  div.innerHTML = `
+    ${item.img ? `<img src="${item.img}" style="width:100%;border-radius:8px;">` : ""}
+    <div class="name">${item.name}</div>
+    <div class="desc">${item.desc || ""}</div>
+    <div class="price">
+      ₩${item.price.toLocaleString()}
+      ${item.min > 1 ? `(Min ${item.min})` : ""}
+    </div>
+    <button onclick="addToCart(${item.id})">${data[lang].add}</button>
+  `;
+  menu.appendChild(div);
+}
+
+
+
+function addToCart(id) {
+  const item = data[lang].items.find(i => i.id === id);
+  if (!cart[id]) {
+    cart[id] = item.min;
+  } else {
+    cart[id]++;
+  }
+  renderCart();
+}
+
+function renderCart() {
+  const cartDiv = document.getElementById("cartItems");
+  const totalDiv = document.getElementById("total");
+  cartDiv.innerHTML = "";
+  let total = 0;
+
+  for (let id in cart) {
+    const item = data[lang].items.find(i => i.id == id);
+    const qty = cart[id];
+    const sum = qty * item.price;
+    total += sum;
+
+    cartDiv.innerHTML += `
+      <div class="cart-item">
+        ${item.name} × ${qty}
+        <span>₩${sum.toLocaleString()}</span>
+<button onclick="showSummary()"
+  style="width:100%;margin-top:8px;padding:10px;
+         background:#111;color:#fff;border:none;border-radius:6px;">
+  Cart
+</button>
+      </div>
+    `;
+  }
+
+  totalDiv.innerText = `${data[lang].total}: ₩${total.toLocaleString()}`;
+}
+
+function setLang(l) {
+  lang = l;
+  renderMenu();
+  renderCart();
+}
+
+renderMenu();
+renderCart();
+
+function showSummary() {
+  const box = document.getElementById("summaryItems");
+  const totalBox = document.getElementById("summaryTotal");
+  box.innerHTML = "";
+
+  let total = 0;
+
+  for (let id in cart) {
+    const item = data[lang].items.find(i => i.id == id);
+    const qty = cart[id];
+    const sum = qty * item.price;
+    total += sum;
+
+    box.innerHTML += `
+      <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
+        <span>${item.name} × ${qty}</span>
+        <span>₩${sum.toLocaleString()}</span>
+      </div>
+    `;
+  }
+
+  totalBox.innerText = `Total: ₩${total.toLocaleString()}`;
+  document.getElementById("summary").style.display = "block";
+}
+
+function closeSummary() {
+  document.getElementById("summary").style.display = "none";
+}
+
+</script>
+
+
+<div id="summary"
+  style="display:none;position:fixed;top:0;left:0;
+         width:100%;height:100%;background:#fff;
+         z-index:999;padding:20px;overflow:auto;">
+
+  <h2 style="text-align:center;margin-bottom:20px;">
+    Order
+  </h2>
+
+  <div id="summaryItems" style="font-size:18px;"></div>
+
+  <div id="summaryTotal"
+       style="margin-top:20px;font-size:22px;font-weight:700;">
+  </div>
+
+  <p style="margin-top:30px;text-align:center;font-size:16px;">
+    📌 Please show this page to server
+  </p>
+
+  <button onclick="closeSummary()"
+    style="width:100%;margin-top:20px;padding:12px;
+           background:#ccc;border:none;border-radius:6px;">
+    Close
+  </button>
+</div>
+
+<div style="
+  margin: 80px 16px 20px;
+  font-size: 12px;
+  color: #777;
+  line-height: 1.5;
+  text-align: center;
+  padding:16px 8px 90px;
+">
+  <strong>Country of Origin</strong><br>
+  Rice: Korea · Kimchi: China (Cabbage, Chili Powder: China)<br>
+  Tofu: Imported Soybeans · Nurungji (Scorched Rice): Korea
+</div>
+
+</body>
+</html>
