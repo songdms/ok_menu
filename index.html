@@ -639,8 +639,21 @@ function renderCart() {
     total += sum;
 
     cartDiv.innerHTML += `
-      <div class="cart-item">
-        ${item.name[lang]} (${item.name.ko}) × ${qty}
+      <div class="cart-item" style="align-items:center;">
+        <div>
+          ${item.name[lang]} (${item.name.ko})
+        </div>
+
+        <div style="display:flex;align-items:center;gap:6px;">
+          <button onclick="removeFromCart(${id})"
+            style="padding:2px 8px;">−</button>
+
+          <span>${qty}</span>
+
+          <button onclick="addToCart(${id})"
+            style="padding:2px 8px;">+</button>
+        </div>
+
         <span>₩${sum.toLocaleString()}</span>
       </div>
     `;
@@ -696,6 +709,21 @@ function showSummary() {
 
 function closeSummary() {
   document.getElementById("summary").style.display = "none";
+}
+
+  
+function removeFromCart(id) {
+  const item = data[lang].items.find(i => i.id === id);
+
+  if (!cart[id]) return;
+
+  if (cart[id] > item.min) {
+    cart[id]--;
+  } else {
+    delete cart[id]; // 최소 수량이면 아예 제거
+  }
+
+  renderCart();
 }
 
 </script>
