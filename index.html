@@ -146,6 +146,9 @@ const data = {
     title: "MENU",
     add: "Add",
     total: "Total",
+    meatNoticeTitle: "Meat Order Notice",
+    meatNotice:
+      "Meat items require a minimum order of <strong>3 servings</strong> per item.<br>(Korean Beef Tartare is excluded.)",
     items: [
   // 🥩 Meat
   {
@@ -522,6 +525,9 @@ const data = {
     title: "菜单",
     add: "加入",
     total: "总价",
+    meatNoticeTitle: "肉类点餐须知",
+    meatNotice:
+      "肉类菜品每种至少需点 <strong>3 人份</strong>。<br>（韩牛生拌牛肉除外）"
   }
 };
 
@@ -535,37 +541,6 @@ function renderMenu() {
   const menu = document.getElementById("menu");
   menu.innerHTML = "";
 
-  const data = {
-  ko: {
-    title: "메뉴",
-    add: "추가",
-    total: "합계",
-    meatNoticeTitle: "고기 주문 안내",
-    meatNotice:
-      "고기류는 메뉴당 최소 3인분부터 주문 가능합니다.<br>(한우 육회는 제외)",
-    items: [ /* items */ ]
-  },
-
-  en: {
-    title: "MENU",
-    add: "Add",
-    total: "Total",
-    meatNoticeTitle: "Meat Order Notice",
-    meatNotice:
-      "Meat items require a minimum order of <strong>3 servings</strong> per item.<br>(Korean Beef Tartare is excluded.)",
-    items: [ /* items */ ]
-  },
-
-  zh: {
-    title: "菜单",
-    add: "加入",
-    total: "总价",
-    meatNoticeTitle: "肉类点餐须知",
-    meatNotice:
-      "肉类菜品每种至少需点 <strong>3 人份</strong>。<br>（韩牛生拌牛肉除外）",
-    items: [ /* items */ ]
-  }
-};
 
 menu.innerHTML += `
   <div class="notice">
