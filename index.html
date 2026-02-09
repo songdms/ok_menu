@@ -123,6 +123,7 @@
 <div class="lang">
   <button onclick="setLang('en')">English</button>
   <button onclick="setLang('zh')">中文</button>
+  <button onclick="setLang('ja')">日本語</button>
 </div>
 <div style="text-align:center; margin:20px 0;">
     ⭐
@@ -606,11 +607,19 @@ const data = {
     meatNoticeTitle: "肉类点餐须知",
     meatNotice:
       "肉类菜品每种至少需点 <strong>3 人份</strong>。<br>（韩牛生拌牛肉除外）"
+  },
+ja: {
+    title: "メニュー",
+    add: "カートに入れる",
+    total: "合計",
+    meatNoticeTitle: "肉類のご注文について",
+    meatNotice: "肉類メニューは<strong>1種類につき3人前以上</strong>のご注文が必要です。<br>（韓牛ユッケは除きます）"
   }
 };
 
 data.zh.items = data.en.items.map(i => ({ ...i }));
-
+data.ja.items = data.en.items.map(i => ({ ...i }));
+    
 let lang = "en";
 let cart = {};
 
