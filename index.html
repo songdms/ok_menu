@@ -622,7 +622,7 @@ function renderItem(item) {
 function addToCart(id) {
   const item = data[lang].items.find(i => i.id === id);
   if (!cart[id]) {
-    cart[id] = item.min;
+    cart[id] = 1;
   } else {
     cart[id]++;
   }
