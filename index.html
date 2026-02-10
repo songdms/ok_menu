@@ -530,6 +530,9 @@ function renderCart() {
   }
 
   totalDiv.innerText = `${data[lang].total}: ₩${total.toLocaleString()}`;
+  document.getElementById("cart").style.display =
+  Object.keys(cart).length ? "block" : "none";
+
 }
 
 function setLang(l) {
