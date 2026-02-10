@@ -539,11 +539,9 @@ function setLang(l) {
 }
 
 function removeFromCart(id) {
-  const item = data[lang].items.find(i => i.id === id);
   if (!cart[id]) return;
-  if (cart[id] > item.min) {
-    cart[id]--;
-  } else {
+  cart[id]--;
+  if (cart[id] <= 0) {
     delete cart[id];
   }
   renderCart();
