@@ -1,40 +1,26 @@
-const express = require("express");
-const cors = require("cors");
-const app = express();
+<script>
+const DEFAULT_DATA = {
+  items: [
+    {
+      id: 1,
+      name: { ko: "소갈비살", en: "Beef Rib Finger", zh: "牛肋条", ja: "牛リブフィンガー" },
+      price: 7900,
+      soldOut: false
+    },
+    {
+      id: 2,
+      name: { ko: "양념소갈비살", en: "Marinated Beef Rib Finger", zh: "腌制牛肋条", ja: "味付け牛リブ" },
+      price: 7900,
+      soldOut: false
+    }
+  ]
+};
 
-app.use(cors());
-app.use(express.json());
+function getMenuData() {
+  return JSON.parse(localStorage.getItem("menuData")) || DEFAULT_DATA;
+}
 
-let orders = [];
-let orderCount = 1;
-
-/* 주문 받기 (모바일에서 호출) */
-app.post("/order", (req, res) => {
-  const order = {
-    id: orderCount++,
-    table: req.body.table,
-    items: req.body.items,
-    request: req.body.request || "",
-    time: new Date().toLocaleTimeString(),
-    status: "NEW"
-  };
-
-  orders.unshift(order);
-  res.json({ success: true });
-});
-
-/* 관리자 페이지에서 주문 불러오기 */
-app.get("/orders", (req, res) => {
-  res.json(orders);
-});
-
-/* 주문 처리 완료 */
-app.post("/order/done/:id", (req, res) => {
-  const order = orders.find(o => o.id == req.params.id);
-  if (order) order.status = "DONE";
-  res.json({ success: true });
-});
-
-app.listen(3000, () => {
-  console.log("✅ Server running on http://localhost:3000");
-});
+function saveMenuData(data) {
+  localStorage.setItem("menuData", JSON.stringify(data));
+}
+</script>
